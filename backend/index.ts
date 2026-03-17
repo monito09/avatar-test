@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import productRoutes from './src/routes/product.routes.js';
+import cartRoutes from './src/routes/cart.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -11,6 +12,8 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/products', productRoutes);
+
+app.use('/api/cart', cartRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {
