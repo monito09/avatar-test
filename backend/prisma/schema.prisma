@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Usuario {
+  idUsuario Int      @id @default(autoincrement())
+  nombre    String
+  carritos  Order[]
+}
+
+model Order {
+  idCarrito          Int         @id @default(autoincrement())
+  idUsuario          Int
+  fechaCreacion      DateTime    @default(now())
+  fechaActualizacion DateTime    @updatedAt
+  totalCompra        Float       @default(0)
+  estado             String      @default("ACTIVO") // "ACTIVO" o "FINALIZADO"
+  
+  usuario            Usuario     @relation(fields: [idUsuario], references:[idUsuario])
+  items              OrderItem[]
+}
+
+model OrderItem {
+  idDetalle  Int    @id @default(autoincrement())
+  idCarrito  Int
+  idProducto Int    
+  sku        String?
+  precio     Float
+  
+  orden      Order  @relation(fields: [idCarrito], references:[idCarrito], onDelete: Cascade)
+}
