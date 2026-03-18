@@ -6,7 +6,6 @@ El proyecto incluye un Backend (Node.js + Express + Prisma + SQLite) y un Fronte
 ## 🚀 Puntos Extra Implementados (Plus)
 - **Paginación y Buscador** integrados en la API y el Frontend.
 - Lógica de cálculo matemático del precio original centralizada en el Backend.
-- **Commits atómicos** en Git para trazabilidad del desarrollo.
 - Diseño responsivo (Mobile-First) acelerado con TailwindCSS.
 
 ## ⏱️ Estimación vs Tiempo Real
@@ -25,22 +24,32 @@ El proyecto incluye un Backend (Node.js + Express + Prisma + SQLite) y un Fronte
 
 ### 1. Iniciar el Backend
 Desde la raíz del proyecto, abre una terminal:
-\`\`\`bash
+```bash
 cd backend
 npm install
+```
+
+Crea un archivo `.env` en la carpeta `backend` y agrega la URL de conexión a la base de datos:
+```env
+DATABASE_URL="file:./dev.db"
+```
+
+Luego, corre los siguientes comandos para configurar la base de datos y arrancar el servidor:
+```bash
+npx prisma generate
 npx prisma migrate dev --name init
 npx tsx prisma/seed.ts  # Crea el usuario por defecto
 npm run dev
-\`\`\`
+```
 El backend correrá en `http://localhost:3001`
 
 ### 2. Iniciar el Frontend
 Abre otra terminal desde la raíz del proyecto:
-\`\`\`bash
+```bash
 cd frontend
 npm install
 npm run dev
-\`\`\`
+```
 El frontend correrá en `http://localhost:5173`
 
 ### 3. Testing con Postman
